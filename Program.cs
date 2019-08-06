@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Once_Upon_A_Dog
+﻿namespace Once_Upon_A_Dog
 {
     class Program
     {
+        #region Main
+
         static void Main(string[] args)
         {
-        }
+
+        } 
+
+        #endregion
     }
 }
