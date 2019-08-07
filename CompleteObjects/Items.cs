@@ -1,14 +1,15 @@
 ﻿namespace Once_Upon_A_Dog
 {
     /// <summary>
-    /// Base properties of a nonliving thing
+    /// Nonliving objects
     /// </summary>
-    public class Food : INonliving
+    public class Item : INonliving
     {
         #region Private Members
 
         /// <summary>
-        /// A sum of a weight and calories of a food
+        /// A weight of a thing, or
+        /// a weight and calories (at the same time) if it's food
         /// </summary>
         private int mWeight;
 
@@ -17,17 +18,13 @@
         #region Public Properties
 
         /// <summary>
-        /// True, if you can mess up food
-        /// </summary>
-        public bool CanBreak { get; set; } = false;
-
-        /// <summary>
         /// A name of a food
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// A sum of a weight and calories of a food
+        /// A weight of a thing, or
+        /// a weight and calories (at the same time) if it's food
         /// </summary>
         public int Weight
         {
@@ -43,6 +40,16 @@
             }
         }
 
+        /// <summary>
+        /// True, if you can break an item
+        /// </summary>
+        public bool CanBreak { get; set; } = false;
+
+        /// <summary>
+        /// True if a living can eat this
+        /// </summary>
+        public bool IsFood { get; set; } = false;
+
         #endregion
 
         #region Constructor
@@ -52,7 +59,7 @@
         /// </summary>
         /// <param name="name">A name of a food</param>
         /// <param name="weight">A sum of a weight and calories of a food</param>
-        public Food(string name, int weight)
+        public Item(string name, int weight)
         {
             // Set properties
             Name = name;
@@ -65,7 +72,7 @@
         /// <param name="name">A name of a food</param>
         /// <param name="weight">A sum of a weight and calories of a food</param>
         /// <param name="canBreak">Change break-ability</param>
-        public Food(string name, int weight, bool canBreak)
+        public Item(string name, int weight, bool canBreak)
         {
             // Set properties
             Name = name;

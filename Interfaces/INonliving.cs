@@ -3,7 +3,7 @@
     /// <summary>
     /// An interface for things
     /// </summary>
-    interface INonliving : IBaseExistence
+    public interface INonliving : IBaseExistence
     {
         #region Properties
 

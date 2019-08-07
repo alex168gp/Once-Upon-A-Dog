@@ -5,7 +5,7 @@ namespace Once_Upon_A_Dog
     /// <summary>
     /// Describes behavior and properties of a living being
     /// </summary>
-    interface ILiving : IBaseExistence
+    public interface ILiving : IBaseExistence
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// An inventory and equipped things
         /// </summary>
-        List<IBaseExistence> Backpack { get; set; }
+        List<Item> Backpack { get; set; }
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Once_Upon_A_Dog
         /// Eat something
         /// </summary>
         /// <param name="food"></param>
-        void Eat(Food food);
+        void Eat(Item food);
 
         #endregion
     }

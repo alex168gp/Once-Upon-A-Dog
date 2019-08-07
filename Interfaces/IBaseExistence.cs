@@ -3,7 +3,7 @@
     /// <summary>
     /// The base origin of objects
     /// </summary>
-    interface IBaseExistence
+    public interface IBaseExistence
     {
         #region Properties
 
