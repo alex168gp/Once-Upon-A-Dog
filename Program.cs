@@ -53,8 +53,7 @@ namespace Once_Upon_A_Dog
             Console.WriteLine("--------------------------------------------------------------------------");
             narrator.MakeSound("Morning.");
             narrator.MakeSound("Owners came back.");
-            daughter.MakeSound("");
-            mother.MakeSound("");
+            daughter.PerformAction(mother, Command.Talk);
             son.MakeSound("");
             narrator.MakeSound("And kicked the old dog from house.");
             // Second scene
@@ -99,8 +98,7 @@ namespace Once_Upon_A_Dog
             narrator.MakeSound("All family work on a field, mowing the wheat.");
             son.MakeSound("");
             narrator.MakeSound("A wolf appeared out of nowhere, and took a baby.");
-            mother.MakeSound("");
-            daughter.MakeSound("");
+            daughter.PerformAction(mother, Command.Talk);
             father.PerformComplicatedAction("Tries to chase but he's too slow");
             son.MakeSound("");
             son.PerformComplicatedAction("Playing with a wolf head");
@@ -117,8 +115,7 @@ namespace Once_Upon_A_Dog
             wolf.PerformComplicatedAction("Runs away");
             father.PerformComplicatedAction("Runs behind a dog");
             dog.PerformComplicatedAction("Runs with a baby");
-            mother.MakeSound("");
-            daughter.MakeSound("");
+            mother.PerformAction(daughter, Command.Talk);
             dog.PerformComplicatedAction("Comes with a baby");
             wolf.PerformComplicatedAction("Watching behind some bushes");
             son.MakeSound("");

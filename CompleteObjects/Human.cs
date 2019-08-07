@@ -41,6 +41,34 @@ namespace Once_Upon_A_Dog
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Say something with another creature
+        /// </summary>
+        /// <param name="words">Words to say</param>
+        /// <param name="creature">Some creature you want to speak with</param>
+        public override void MakeSound(string words, Creature creature)
+        {
+            // If this human want to speak to itself
+            if (creature == this)
+            {
+                // let it
+                MakeSound(words);
+
+                return;
+            }
+
+            // Reset foreground color
+            Console.ResetColor();
+
+            // If we have nothing to say
+            if (String.IsNullOrEmpty(words))
+                // just make some noise
+                Console.WriteLine("{0} and {1}: AAAAAAAAAAAAA", Name, creature.Name);
+            else
+                // or say what a creature want to say
+                Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
+        }
+
         #endregion
 
     }
