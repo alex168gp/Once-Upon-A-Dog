@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Once_Upon_A_Dog
 {
@@ -59,7 +60,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        public void ExecuteAction(ILiving living, Command command)
+        public void ExecuteAction(Creature creature, Command command)
         {
 
         }
@@ -69,26 +70,41 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="nonliving">A thing to interact with</param>
         /// <param name="command">What to do with a thing</param>
-        public void ExecuteAction(INonliving nonliving, Command command)
+        public void ExecuteAction(Item item, Command command)
         {
-
-        }
-
-        /// <summary>
-        /// Create noise
-        /// </summary>
-        public void MakeSound()
-        {
-
+            switch (command)
+            {
+                case Command.Eat:
+                    if (mWeight + item.Weight >= 10)
+                    {
+                        item = null;
+                    }
+                        break;
+                    mWeight += item.Weight;
+                    break;
+                case Command.Talk:
+                    break;
+                case Command.Take:
+                    break;
+                case Command.Give:
+                    break;
+                case Command.Kick:
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        public void MakeSound(string words)
+        public virtual void MakeSound(string words)
         {
-
+            if (String.IsNullOrEmpty(words))
+                Console.WriteLine("Wryyyy");
+            else
+                Console.WriteLine(words);
         }
 
         /// <summary>

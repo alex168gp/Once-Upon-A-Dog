@@ -38,11 +38,6 @@ namespace Once_Upon_A_Dog
         void ExecuteAction(INonliving nonliving, Command command);
 
         /// <summary>
-        /// Create noise
-        /// </summary>
-        void MakeSound();
-
-        /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>

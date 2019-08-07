@@ -49,7 +49,7 @@
     <Compile Include="CompleteObjects\Wolf.cs" />
     <Compile Include="Interfaces\IBaseExistence.cs" />
     <Compile Include="DataModels\Command.cs" />
-    <Compile Include="CompleteObjects\Items.cs" />
+    <Compile Include="CompleteObjects\Item.cs" />
     <Compile Include="Interfaces\ILiving.cs" />
     <Compile Include="Interfaces\INonliving.cs" />
     <Compile Include="Program.cs" />
