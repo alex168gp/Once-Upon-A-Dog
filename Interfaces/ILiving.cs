@@ -3,9 +3,9 @@
 namespace Once_Upon_A_Dog
 {
     /// <summary>
-    /// An interface for a living being
+    /// Describes behavior and properties of a living being
     /// </summary>
-    interface ILiving : BaseExistence
+    interface ILiving : IBaseExistence
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// An inventory and equipped things
         /// </summary>
-        List<BaseExistence> Backpack { get; set; }
+        List<IBaseExistence> Backpack { get; set; }
 
         #endregion
 

@@ -1,5 +1,8 @@
 ﻿namespace Once_Upon_A_Dog
 {
+    /// <summary>
+    /// Base properties of a nonliving thing
+    /// </summary>
     public class Food : INonliving
     {
         #region Private Members

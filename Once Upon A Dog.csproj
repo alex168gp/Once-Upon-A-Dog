@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseExistence.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Food.cs" />
-    <Compile Include="ILiving.cs" />
-    <Compile Include="INonliving.cs" />
+    <Compile Include="Interfaces\IBaseExistence.cs" />
+    <Compile Include="DataModels\Command.cs" />
+    <Compile Include="CompleteObjects\Food.cs" />
+    <Compile Include="Interfaces\ILiving.cs" />
+    <Compile Include="Interfaces\INonliving.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
