@@ -11,7 +11,7 @@ namespace Once_Upon_A_Dog
         #region Private Members
 
         /// <summary>
-        /// How heavy a human
+        /// How heavy a creature
         /// </summary>
         private int mWeight;
 
@@ -22,7 +22,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// True, if a creature can't eat more
         /// </summary>
-        public bool IsFull { get; set; }
+        public bool IsFull { get; set; } = false;
 
         /// <summary>
         /// An inventory and equipped things
@@ -30,12 +30,12 @@ namespace Once_Upon_A_Dog
         public List<Item> Inventory { get; set; } = new List<Item>();
 
         /// <summary>
-        /// A name of a human
+        /// A name of a creature
         /// </summary>
-        public string Name { get; set; };
+        public string Name { get; set; } = "No name";
 
         /// <summary>
-        /// How heavy a human
+        /// How heavy a creature
         /// </summary>
         public int Weight
         {
@@ -111,7 +111,7 @@ namespace Once_Upon_A_Dog
                     }
                     else
                         // TODO: Add more variety in handling a situation
-                        Console.WriteLine("Can't eat this, for some reasons");
+                        Console.WriteLine("Can't eat this, for some reason");
                     break;
                 case Command.Talk:
                     break;
@@ -145,10 +145,10 @@ namespace Once_Upon_A_Dog
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise
-                Console.WriteLine("Wryyyy");
+                Console.WriteLine("{0}: Wryyyyyyyyy", Name);
             else
                 // or say what a creature want to say
-                Console.WriteLine(words);
+                Console.WriteLine("{0}: {1}",Name, words);
         }
 
         #endregion

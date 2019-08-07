@@ -26,9 +26,20 @@ namespace Once_Upon_A_Dog
         /// <param name="words">Words to say</param>
         public override void MakeSound(string words)
         {
-            // Say something
-            Console.WriteLine(words);
-        } 
+            // Change foreground color for humans
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            // If we have nothing to say
+            if (String.IsNullOrEmpty(words))
+                // just make some noise
+                Console.WriteLine("{0}: AAAAAAAAAAAAA", Name);
+            else
+                // Say something
+                Console.WriteLine("{0}: {1}", Name, words);
+
+            // Reset foreground color
+            Console.ResetColor();
+        }
 
         #endregion
 
