@@ -32,7 +32,7 @@
             set
             {
                 // Weight can't be negative
-                if (value < 0)
+                if (value <= 0)
                     throw new System.ArgumentException("Weight should be more than or equal 0");
 
                 // Set new value

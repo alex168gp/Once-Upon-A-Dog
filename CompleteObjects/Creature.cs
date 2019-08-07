@@ -27,7 +27,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// An inventory and equipped things
         /// </summary>
-        public List<Item> Backpack { get; set; } = new List<Item>();
+        public List<Item> Inventory { get; set; } = new List<Item>();
 
         /// <summary>
         /// A name of a human
@@ -42,9 +42,13 @@ namespace Once_Upon_A_Dog
             get => mWeight;
             set
             {
-                // Weight can't be negative
-                if (value < 0)
-                    throw new System.ArgumentException("Weight should be more than or equal 0");
+                // Weight can't be negative or higher than 10
+                if (value < 0 || value > 10)
+                    throw new System.FormatException("Weight should be more than 0 or lower than 10");
+                // creature can have a maximum weight of 10
+                else if (value == 10)
+                    // and it become full and can't eat more
+                    IsFull = true;
 
                 // Set new value
                 mWeight = value;
@@ -75,22 +79,53 @@ namespace Once_Upon_A_Dog
             switch (command)
             {
                 case Command.Eat:
-                    if (mWeight + item.Weight >= 10)
+                    // We can eat only food
+                    if (item.IsFood && !IsFull)
                     {
-                        item = null;
+                        // If we can't eat food entirely...
+                        if (mWeight + item.Weight > 10)
+                        {
+                            // eat a part of it
+                            Console.WriteLine("You ate a part of a food, and now you're full");
+
+                            // How much creature ate
+                            item.Weight -= (10 - mWeight);
+
+                            // A creature get maximum weight
+                            mWeight = 10;
+                        }
+                        else
+                        {
+                            // We can eat a whole food item
+                            mWeight += item.Weight;
+
+                            // TODO: Add the ability to eat food that is not in your inventory
+                            Inventory.Remove(item);
+                        }
                     }
-                        break;
-                    mWeight += item.Weight;
+                    else
+                        // TODO: Add more variety in handling a situation
+                        Console.WriteLine("Can't eat this, for some reasons");
                     break;
                 case Command.Talk:
                     break;
                 case Command.Take:
+                    // If we have item...
+                    if (item != null)
+                        // take it
+                        Inventory.Add(item);
+                    else
+                        // TODO: add some handler
+                        Console.WriteLine("There is no item to take");
                     break;
                 case Command.Give:
+                    throw new System.NotImplementedException("Give is not implemented");
                     break;
                 case Command.Kick:
+                    throw new System.NotImplementedException("Kick is not implemented");
                     break;
                 default:
+                    Console.WriteLine("You used unknown command, I don't know how");
                     break;
             }
         }
@@ -101,19 +136,13 @@ namespace Once_Upon_A_Dog
         /// <param name="words">Words to say</param>
         public virtual void MakeSound(string words)
         {
+            // If we have nothing to say
             if (String.IsNullOrEmpty(words))
+                // just make some noise
                 Console.WriteLine("Wryyyy");
             else
+                // or say what a creature should say
                 Console.WriteLine(words);
-        }
-
-        /// <summary>
-        /// Eat something
-        /// </summary>
-        /// <param name="food"></param>
-        public void Eat(Item food)
-        {
-
         }
 
         #endregion

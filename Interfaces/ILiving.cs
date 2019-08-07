@@ -17,7 +17,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// An inventory and equipped things
         /// </summary>
-        List<Item> Backpack { get; set; }
+        List<Item> Inventory { get; set; }
 
         #endregion
 
@@ -28,26 +28,20 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        void ExecuteAction(ILiving living, Command command);
+        void ExecuteAction(Creature creature, Command command);
 
         /// <summary>
         /// Interact with a thing
         /// </summary>
         /// <param name="nonliving">A thing to interact with</param>
         /// <param name="command">What to do with a thing</param>
-        void ExecuteAction(INonliving nonliving, Command command);
+        void ExecuteAction(Item item, Command command);
 
         /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
         void MakeSound(string words);
-
-        /// <summary>
-        /// Eat something
-        /// </summary>
-        /// <param name="food"></param>
-        void Eat(Item food);
 
         #endregion
     }
