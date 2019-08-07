@@ -69,7 +69,9 @@ namespace Once_Upon_A_Dog
             // If you want to talk
             if (command.Equals(Command.Talk) && creature != null)
                 // talk
-                MakeSound(words);
+                MakeSound(words, creature);
+            else
+                throw new System.Exception("Something is wrong");
 
             // TODO: Need more interaction
             // TODO: Exception handling
@@ -88,23 +90,28 @@ namespace Once_Upon_A_Dog
                     // We can eat only food
                     if (item.IsFood && !IsFull)
                     {
-                        // If we can't eat food entirely...
-                        if (mWeight + item.Weight > 10)
+                        // If creature can't eat food entirely...
+                        if (Weight + item.Weight > 10)
                         {
                             // eat a part of it
-                            Console.WriteLine("You ate a part of a food, and now you're full");
+                            Console.WriteLine("{0} ate a part of a {1}, and now full.", Name, item.Name);
 
                             // How much creature ate
-                            item.Weight -= (10 - mWeight);
+                            item.Weight -= (10 - Weight);
 
                             // A creature get maximum weight
-                            mWeight = 10;
+                            Weight = 10;
                         }
+                        // then creature can eat it whole
                         else
                         {
-                            // We can eat a whole food item
-                            mWeight += item.Weight;
+                            // eat food
+                            Console.WriteLine("{0} ate a {1}.", Name, item.Name);
 
+                            // Creature get all the weight from a food
+                            Weight += item.Weight;
+
+                            // TODO: Find a proper way of disposing food
                             // TODO: Add the ability to eat food that is not in your inventory
                             Inventory.Remove(item);
                         }
@@ -114,6 +121,8 @@ namespace Once_Upon_A_Dog
                         Console.WriteLine("Can't eat this, for some reason");
                     break;
                 case Command.Talk:
+                    // TODO: Add a proper handler
+                    Console.WriteLine("Why I'm talking to a thing?");
                     break;
                 case Command.Take:
                     // If we have item...
@@ -142,13 +151,34 @@ namespace Once_Upon_A_Dog
         /// <param name="words">Words to say</param>
         public virtual void MakeSound(string words)
         {
+            // Reset foreground color
+            Console.ResetColor();
+
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise
                 Console.WriteLine("{0}: Wryyyyyyyyy", Name);
             else
                 // or say what a creature want to say
-                Console.WriteLine("{0}: {1}",Name, words);
+                Console.WriteLine("{0}: {1}", Name, words);
+        }
+
+        /// <summary>
+        /// Say something
+        /// </summary>
+        /// <param name="words">Words to say</param>
+        public virtual void MakeSound(string words, Creature creature)
+        {
+            // Reset foreground color
+            Console.ResetColor();
+
+            // If we have nothing to say
+            if (String.IsNullOrEmpty(words))
+                // just make some noise
+                Console.WriteLine("{0} and {1}: Wryyyyyyyyy", Name, creature.Name);
+            else
+                // or say what a creature want to say
+                Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
         }
 
         #endregion

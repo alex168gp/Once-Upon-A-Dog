@@ -72,12 +72,13 @@
         /// <param name="name">A name of a food</param>
         /// <param name="weight">A sum of a weight and calories of a food</param>
         /// <param name="canBreak">Change break-ability</param>
-        public Item(string name, int weight, bool canBreak)
+        public Item(string name, int weight, bool canBreak = false, bool isFood = false)
         {
             // Set properties
             Name = name;
             Weight = weight;
             CanBreak = canBreak;
+            IsFood = isFood;
         }
 
         #endregion
