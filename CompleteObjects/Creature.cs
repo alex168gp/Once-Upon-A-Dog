@@ -32,7 +32,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// A name of a human
         /// </summary>
-        public string Name { get; set; } = "No name";
+        public string Name { get; set; };
 
         /// <summary>
         /// How heavy a human
@@ -64,9 +64,15 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        public void ExecuteAction(Creature creature, Command command)
+        public void ExecuteAction(Creature creature, Command command, string words = "")
         {
+            // If you want to talk
+            if (command.Equals(Command.Talk) && creature != null)
+                // talk
+                MakeSound(words);
 
+            // TODO: Need more interaction
+            // TODO: Exception handling
         }
 
         /// <summary>
@@ -141,9 +147,25 @@ namespace Once_Upon_A_Dog
                 // just make some noise
                 Console.WriteLine("Wryyyy");
             else
-                // or say what a creature should say
+                // or say what a creature want to say
                 Console.WriteLine(words);
         }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="name">A name of a creature</param>
+        /// <param name="weight">A weight of a creature, can't be negative and higher than 10</param>
+        public Creature(string name, int weight)
+        {
+            // Set properties
+            Name = name;
+            Weight = weight;
+        } 
 
         #endregion
     }

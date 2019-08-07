@@ -28,7 +28,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        void ExecuteAction(Creature creature, Command command);
+        void ExecuteAction(Creature creature, Command command, string words);
 
         /// <summary>
         /// Interact with a thing

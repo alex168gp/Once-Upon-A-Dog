@@ -14,15 +14,15 @@
         /// </summary>
         Talk,
         /// <summary>
-        /// Add item to inventory
+        /// Add <see cref="Item"/> to <see cref="Creature.Inventory"/>
         /// </summary>
         Take,
         /// <summary>
-        /// TODO: move item from one <see cref="ILiving.Inventory"/> to another
+        /// Move item from one <see cref="ILiving.Inventory"/> to another
         /// </summary>
         Give,
         /// <summary>
-        /// TODO: damage item
+        /// Damage item
         /// </summary>
         Kick
     }
