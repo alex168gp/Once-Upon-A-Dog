@@ -20,16 +20,6 @@ namespace Once_Upon_A_Dog
         #region Public Properties
 
         /// <summary>
-        /// True, if a creature can't eat more
-        /// </summary>
-        public bool IsFull { get; set; } = false;
-
-        /// <summary>
-        /// An inventory and equipped things
-        /// </summary>
-        public List<Item> Inventory { get; set; } = new List<Item>();
-
-        /// <summary>
         /// A name of a creature
         /// </summary>
         public string Name { get; set; } = "No name";
@@ -55,6 +45,32 @@ namespace Once_Upon_A_Dog
             }
         }
 
+        /// <summary>
+        /// True, if a creature can't eat more
+        /// </summary>
+        public bool IsFull { get; set; } = false;
+
+        /// <summary>
+        /// An inventory and equipped things
+        /// </summary>
+        public List<Item> Inventory { get; set; } = new List<Item>();
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="name">A name of a creature</param>
+        /// <param name="weight">A weight of a creature, can't be negative and higher than 10</param>
+        public Creature(string name, int weight)
+        {
+            // Set properties
+            Name = name;
+            Weight = weight;
+        }
+
         #endregion
 
         #region Public Methods
@@ -64,7 +80,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        public void ExecuteAction(Creature creature, Command command, string words = "")
+        public void PerformAction(Creature creature, Command command, string words = "")
         {
             // If you want to talk
             if (command.Equals(Command.Talk) && creature != null)
@@ -74,6 +90,7 @@ namespace Once_Upon_A_Dog
                 throw new System.Exception("Something is wrong");
 
             // TODO: Need more interaction
+            // TODO: Think about interaction with itself
             // TODO: Exception handling
         }
 
@@ -82,7 +99,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="nonliving">A thing to interact with</param>
         /// <param name="command">What to do with a thing</param>
-        public void ExecuteAction(Item item, Command command)
+        public void PerformAction(Item item, Command command)
         {
             switch (command)
             {
@@ -146,6 +163,17 @@ namespace Once_Upon_A_Dog
         }
 
         /// <summary>
+        /// Execute action that is out of the basic <see cref="Command"/>s.
+        /// Can't change or interact with anything
+        /// </summary>
+        /// <param name="action">An action to execute</param>
+        public void PerformComplicatedAction(string action)
+        {
+            // Execute action
+            Console.WriteLine("{0} *{1}*", Name, action);
+        }
+
+        /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
@@ -164,11 +192,21 @@ namespace Once_Upon_A_Dog
         }
 
         /// <summary>
-        /// Say something
+        /// Say something with another creature
         /// </summary>
         /// <param name="words">Words to say</param>
+        /// <param name="creature">Some creature you want to speak with</param>
         public virtual void MakeSound(string words, Creature creature)
         {
+            // If this creature want to speak to itself
+            if (creature == this)
+            {
+                // let it
+                MakeSound(words);
+
+                return;
+            }
+
             // Reset foreground color
             Console.ResetColor();
 
@@ -180,22 +218,6 @@ namespace Once_Upon_A_Dog
                 // or say what a creature want to say
                 Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
         }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// <param name="name">A name of a creature</param>
-        /// <param name="weight">A weight of a creature, can't be negative and higher than 10</param>
-        public Creature(string name, int weight)
-        {
-            // Set properties
-            Name = name;
-            Weight = weight;
-        } 
 
         #endregion
     }

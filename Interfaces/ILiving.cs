@@ -28,20 +28,34 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        void ExecuteAction(Creature creature, Command command, string words);
+        void PerformAction(Creature creature, Command command, string words);
 
         /// <summary>
         /// Interact with a thing
         /// </summary>
         /// <param name="nonliving">A thing to interact with</param>
         /// <param name="command">What to do with a thing</param>
-        void ExecuteAction(Item item, Command command);
+        void PerformAction(Item item, Command command);
+
+        /// <summary>
+        /// Execute action that is out of the basic <see cref="Command"/>s.
+        /// Can't change or interact with anything
+        /// </summary>
+        /// <param name="action">An action to execute</param>
+        void PerformComplicatedAction(string action);
 
         /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
         void MakeSound(string words);
+
+        /// <summary>
+        /// Say something
+        /// </summary>
+        /// <param name="words">Words to say</param>
+        /// <param name="creature">Some creature you want to speak with</param>
+        void MakeSound(string words, Creature creature);
 
         #endregion
     }
