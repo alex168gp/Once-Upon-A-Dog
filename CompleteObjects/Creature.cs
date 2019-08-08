@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Once_Upon_A_Dog
 {
@@ -15,10 +16,19 @@ namespace Once_Upon_A_Dog
         /// </summary>
         private int mWeight;
 
+        #endregion
+
+        #region Protected Members
+
         /// <summary>
         /// Default noise for this creature
         /// </summary>
-        private readonly string mNoise;
+        protected readonly string mNoise;
+
+        /// <summary>
+        /// Default console foreground for this creature
+        /// </summary>
+        protected readonly ConsoleColor mForegroundColor;
 
         #endregion
 
@@ -69,12 +79,13 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="name">A name of a creature</param>
         /// <param name="weight">A weight of a creature, can't be negative and higher than 10</param>
-        public Creature(string name, int weight)
+        public Creature(string name, int weight, string noise = "Wryyyyyyyyy", ConsoleColor foregroundColor = ConsoleColor.White)
         {
             // Set properties
             Name = name;
             Weight = weight;
-            mNoise = "Wryyyyyyyyy";
+            mNoise = noise;
+            mForegroundColor = foregroundColor;
         }
 
         #endregion
@@ -185,8 +196,8 @@ namespace Once_Upon_A_Dog
         /// <param name="words">Words to say</param>
         public virtual void MakeSound(string words = null)
         {
-            // Reset foreground color
-            Console.ResetColor();
+            // Change color of his words for this creature
+            Console.ForegroundColor = mForegroundColor;
 
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
@@ -195,6 +206,12 @@ namespace Once_Upon_A_Dog
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0}: {1}", Name, words);
+
+            // A small pause for words to say
+            Thread.Sleep(1000);
+
+            // Reset foreground color
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -213,16 +230,19 @@ namespace Once_Upon_A_Dog
                 return;
             }
 
-            // Reset foreground color
-            Console.ResetColor();
+            // Change color of his words for this creature
+            Console.ForegroundColor = mForegroundColor;
 
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise, initiator considered way louder
-                Console.WriteLine("{0} and {1}: Wryyyyyyyyy", Name, creature.Name);
+                Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, mNoise);
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
+
+            // Reset foreground color
+            Console.ResetColor();
         }
 
         #endregion

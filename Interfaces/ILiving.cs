@@ -51,7 +51,7 @@ namespace Once_Upon_A_Dog
         void MakeSound(string words);
 
         /// <summary>
-        /// Say something
+        /// Say something with another creature
         /// </summary>
         /// <param name="words">Words to say</param>
         /// <param name="creature">Some creature you want to speak with</param>

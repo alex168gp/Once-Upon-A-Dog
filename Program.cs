@@ -168,14 +168,15 @@ namespace Once_Upon_A_Dog
 
         #region Static Helpers
 
+        // TODO: Move to a storyboard
         /// <summary>
-        /// Allows to read story, and after some fixed time (30 sec) clears all text.
+        /// Allows to read story, and after some fixed time clears all text.
         /// After the story continues
         /// </summary>
         static void NewPage()
         {
-            // A pause for 30 seconds
-            Thread.Sleep(000);
+            // A pause before page refresh
+            Thread.Sleep(5000);
 
             // Clear console screen
             Console.Clear();
