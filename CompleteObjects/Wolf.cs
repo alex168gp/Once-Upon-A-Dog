@@ -24,7 +24,7 @@ namespace Once_Upon_A_Dog
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        public override void MakeSound(string words)
+        public override void MakeSound(string words = null)
         {
             // Change foreground color for wolfs
             Console.ForegroundColor = ConsoleColor.Red;
@@ -46,7 +46,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="words">Words to say</param>
         /// <param name="creature">Some creature you want to speak with</param>
-        public override void MakeSound(string words, Creature creature)
+        public override void MakeSound(Creature creature, string words = null)
         {
             // If this wolf want to speak to itself
             if (creature == this)
@@ -57,16 +57,19 @@ namespace Once_Upon_A_Dog
                 return;
             }
 
-            // Reset foreground color
-            Console.ResetColor();
+            // Change foreground color for wolfs
+            Console.ForegroundColor = ConsoleColor.Red;
 
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
-                // just make some noise
+                // just make some noise, initiator considered way louder
                 Console.WriteLine("{0} and {1}: Awoooooo", Name, creature.Name);
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
+
+            // Reset foreground color
+            Console.ResetColor();
         }
 
         #endregion

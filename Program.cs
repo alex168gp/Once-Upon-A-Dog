@@ -24,6 +24,7 @@ namespace Once_Upon_A_Dog
             Creature crowdInHouse = new Creature("People at the wedding", 1);
 
             #endregion
+
             // TODO: Create a storyboard for text, and change all MakeSound implementations to fit
             // TODO: Create a scene where all objects will be connected
             // TODO: Add interactivity
@@ -36,9 +37,9 @@ namespace Once_Upon_A_Dog
             narrator.MakeSound("Somewhere a rooster greets the rising sun.");
             Console.WriteLine("-------------------------------------------------------------------------");
             narrator.MakeSound("In a small village lived old dog.");
-            dog.MakeSound("");
-            dog.MakeSound("");
-            dog.MakeSound("");
+            dog.MakeSound();
+            dog.MakeSound();
+            dog.MakeSound();
             narrator.MakeSound("His owners were a family of 4: father, mother, daughter and baby son.");
             narrator.MakeSound("Old dog caused a lot of small troubles, but he was always forgiven.");
             narrator.MakeSound("Father and mother with baby left to sell some goods.");
@@ -49,12 +50,12 @@ namespace Once_Upon_A_Dog
             daughter.PerformComplicatedAction("Sings");
             narrator.MakeSound("While everyone from a family were gone, a thief came to their house.");
             narrator.MakeSound("Even though he was making a lot of sound, old dog didn't hear him.");
-            dog.MakeSound("");
+            dog.MakeSound();
             Console.WriteLine("--------------------------------------------------------------------------");
             narrator.MakeSound("Morning.");
             narrator.MakeSound("Owners came back.");
             daughter.PerformAction(mother, Command.Talk);
-            son.MakeSound("");
+            son.MakeSound();
             narrator.MakeSound("And kicked the old dog from house.");
             // Second scene
             // TODO: Add time handler for a fluent storytelling
@@ -76,17 +77,17 @@ namespace Once_Upon_A_Dog
             wolf.MakeSound("Yeah");
             dog.PerformComplicatedAction("Stomach rumbling");
             wolf.MakeSound("Did they kicked you out?");
-            dog.MakeSound("*Makes a sad face*");
+            dog.PerformComplicatedAction("Makes a sad face");
             // Third scene
             NewPage();
-            wolf.MakeSound("*Walks around*");
+            wolf.PerformComplicatedAction("Walks around");
             wolf.MakeSound("Do you remember how you chased me before?");
             dog.MakeSound("Well, you know...");
             wolf.MakeSound("Yeah, it was your job.");
             wolf.PerformComplicatedAction("Sits on a stump");
             wolf.MakeSound("All my life I live here, and no one gives me even a small bone.");
             dog.MakeSound("Well, you know...");
-            crowd.MakeSound("*A song*");
+            crowd.PerformComplicatedAction("Sing");
             wolf.MakeSound("Now you're like me muahaha, AHAHAHA HUH");
             wolf.PerformComplicatedAction("Hurt his back");
             wolf.MakeSound("Ooooh");
@@ -96,16 +97,16 @@ namespace Once_Upon_A_Dog
             NewPage();
             narrator.MakeSound("Somewhere in the midday.");
             narrator.MakeSound("All family work on a field, mowing the wheat.");
-            son.MakeSound("");
+            son.MakeSound();
             narrator.MakeSound("A wolf appeared out of nowhere, and took a baby.");
             daughter.PerformAction(mother, Command.Talk);
             father.PerformComplicatedAction("Tries to chase but he's too slow");
-            son.MakeSound("");
+            son.MakeSound();
             son.PerformComplicatedAction("Playing with a wolf head");
             dog.PerformComplicatedAction("Appears from a bush");
-            dog.MakeSound("");
-            dog.MakeSound("");
-            dog.MakeSound("");
+            dog.MakeSound();
+            dog.MakeSound();
+            dog.MakeSound();
             dog.PerformComplicatedAction($"Starts a fight with {wolf.Name}");
             wolf.PerformComplicatedAction("Drops a baby");
             father.PerformComplicatedAction("Hides behind a bush and just watch");
@@ -118,7 +119,7 @@ namespace Once_Upon_A_Dog
             mother.PerformAction(daughter, Command.Talk);
             dog.PerformComplicatedAction("Comes with a baby");
             wolf.PerformComplicatedAction("Watching behind some bushes");
-            son.MakeSound("");
+            son.MakeSound();
             narrator.MakeSound("Everyone happy");
             // Last scene
             NewPage();
@@ -126,8 +127,8 @@ namespace Once_Upon_A_Dog
             narrator.MakeSound("A family decided to arrange a wedding for their daughter, the whole village and their relatives gathered in the house.");
             narrator.MakeSound("After the accident with a baby, old dog started to live like before, and even better.");
             narrator.MakeSound("Everything bad was forgotten.");
-            wolf.MakeSound("");
-            wolf.MakeSound("");
+            wolf.MakeSound();
+            wolf.MakeSound();
             narrator.MakeSound("Dog run into the forest.");
             narrator.MakeSound("He found his friend wolf on a stump, shivering from cold and howling.");
             dog.PerformComplicatedAction("Breathing hard");
@@ -150,9 +151,9 @@ namespace Once_Upon_A_Dog
             }
             crowdInHouse.PerformComplicatedAction("Everyone is sitting at the table and start to sing");
             wolf.MakeSound("I'll sing right now for sure.");
-            wolf.MakeSound("");
+            wolf.MakeSound();
             crowdInHouse.PerformComplicatedAction("Stops singing");
-            crowdInHouse.MakeSound("");
+            crowdInHouse.MakeSound();
             narrator.MakeSound("Some try to run, some took something to defend themselves. Old dog tries to chase away wolf.");
             dog.MakeSound("Well, you know...");
             wolf.MakeSound("Thank you.");
@@ -174,7 +175,7 @@ namespace Once_Upon_A_Dog
         static void NewPage()
         {
             // A pause for 30 seconds
-            Thread.Sleep(30000);
+            Thread.Sleep(000);
 
             // Clear console screen
             Console.Clear();

@@ -15,6 +15,11 @@ namespace Once_Upon_A_Dog
         /// </summary>
         private int mWeight;
 
+        /// <summary>
+        /// Default noise for this creature
+        /// </summary>
+        private readonly string mNoise;
+
         #endregion
 
         #region Public Properties
@@ -69,6 +74,7 @@ namespace Once_Upon_A_Dog
             // Set properties
             Name = name;
             Weight = weight;
+            mNoise = "Wryyyyyyyyy";
         }
 
         #endregion
@@ -80,12 +86,12 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        public void PerformAction(Creature creature, Command command, string words = "")
+        public void PerformAction(Creature creature, Command command, string words = null)
         {
             // If you want to talk
             if (command.Equals(Command.Talk) && creature != null)
                 // talk
-                MakeSound(words, creature);
+                MakeSound(creature, words);
             else
                 throw new System.Exception("Something is wrong");
 
@@ -164,7 +170,7 @@ namespace Once_Upon_A_Dog
 
         /// <summary>
         /// Execute action that is out of the basic <see cref="Command"/>s.
-        /// Can't change or interact with anything
+        /// Action can't affect anything
         /// </summary>
         /// <param name="action">An action to execute</param>
         public void PerformComplicatedAction(string action)
@@ -177,7 +183,7 @@ namespace Once_Upon_A_Dog
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        public virtual void MakeSound(string words)
+        public virtual void MakeSound(string words = null)
         {
             // Reset foreground color
             Console.ResetColor();
@@ -185,7 +191,7 @@ namespace Once_Upon_A_Dog
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise
-                Console.WriteLine("{0}: Wryyyyyyyyy", Name);
+                Console.WriteLine("{0}: {1}", Name, mNoise);
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0}: {1}", Name, words);
@@ -196,7 +202,7 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="words">Words to say</param>
         /// <param name="creature">Some creature you want to speak with</param>
-        public virtual void MakeSound(string words, Creature creature)
+        public virtual void MakeSound(Creature creature, string words = null)
         {
             // If this creature want to speak to itself
             if (creature == this)
@@ -212,7 +218,7 @@ namespace Once_Upon_A_Dog
 
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
-                // just make some noise
+                // just make some noise, initiator considered way louder
                 Console.WriteLine("{0} and {1}: Wryyyyyyyyy", Name, creature.Name);
             else
                 // or say what a creature want to say
