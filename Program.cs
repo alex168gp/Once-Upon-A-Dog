@@ -25,6 +25,8 @@ namespace Once_Upon_A_Dog
 
             #endregion
 
+            #region Original Story
+
             // TODO: Create a storyboard for text, and change all MakeSound implementations to fit
             // TODO: Create a scene where all objects will be connected
             // TODO: Add interactivity
@@ -139,11 +141,11 @@ namespace Once_Upon_A_Dog
             Thread.Sleep(3000);
             dog.PerformComplicatedAction($"Sitting under the table with {wolf.Name}");
             // Wolf start to eat
-            while(!wolf.IsFull)
+            while (!wolf.IsFull)
             {
                 if (wolf.Weight == 8)
                     wolf.MakeSound("I'll sing right now.");
-                
+
                 // TODO: Add different food
                 // TODO: Change messages
                 crowdInHouse.PerformAction(new Item("Food", 2, isFood: true), Command.Eat);
@@ -160,7 +162,10 @@ namespace Once_Upon_A_Dog
             dog.MakeSound("Ah...");
             wolf.PerformComplicatedAction("Breaks a fence");
             wolf.MakeSound("You can come, anytime.");
-            narrator.MakeSound("The end.");
+            narrator.MakeSound("The end."); 
+
+            #endregion
+
             Console.ReadKey();
         }
 

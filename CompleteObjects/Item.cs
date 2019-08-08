@@ -1,4 +1,6 @@
-﻿namespace Once_Upon_A_Dog
+﻿using System;
+
+namespace Once_Upon_A_Dog
 {
     /// <summary>
     /// Nonliving objects
@@ -28,12 +30,23 @@
         /// </summary>
         public int Weight
         {
-            get => mWeight;
+            get
+            {
+                return IsDestroyed ? 0 : mWeight;
+            }
             set
             {
                 // Weight can't be negative
-                if (value <= 0)
-                    throw new System.ArgumentException("Weight should be more than or equal 0");
+                if (value < 0)
+                    throw new System.ArgumentException("Weight should be more than 0");
+                // If it has 0 weight, a thing is destroyed
+                else if (value == 0)
+                {
+                    // TODO: Restrict use of destroyed item
+                    Console.WriteLine("{0} destroyed, can't use it",Name);
+                    // TODO: Make a proper way of disposing
+                    IsDestroyed = true;
+                }
 
                 // Set new value
                 mWeight = value;
@@ -49,6 +62,11 @@
         /// True if a living can eat this
         /// </summary>
         public bool IsFood { get; set; } = false;
+
+        /// <summary>
+        /// Indicates if an item can't be used
+        /// </summary>
+        public bool IsDestroyed { get; private set; } = false;
 
         #endregion
 

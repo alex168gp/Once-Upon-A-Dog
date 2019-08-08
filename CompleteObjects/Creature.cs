@@ -90,6 +90,41 @@ namespace Once_Upon_A_Dog
 
         #endregion
 
+        #region Private Methods
+
+        private void EatFood(Item food)
+        {
+            // If creature can't eat food entirely...
+            if (Weight + food.Weight > 10)
+            {
+                // eat a part of it
+                Console.WriteLine("{0} ate a part of a {1}, and now full.", Name, food.Name);
+
+                // How much creature ate
+                food.Weight -= (10 - Weight);
+
+                // A creature get maximum weight
+                Weight = 10;
+            }
+            // then creature can eat it whole
+            else
+            {
+                // eat food
+                Console.WriteLine("{0} ate a {1}.", Name, food.Name);
+
+                // Creature get all the weight from a food
+                Weight += food.Weight;
+
+                food.Weight = 1;
+
+                // TODO: Find a proper way of disposing food
+                // TODO: Add the ability to eat food that is not in your inventory
+                Inventory.Remove(food);
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -121,34 +156,10 @@ namespace Once_Upon_A_Dog
             switch (command)
             {
                 case Command.Eat:
-                    // We can eat only food
+                    // Creature can eat only food
                     if (item.IsFood && !IsFull)
                     {
-                        // If creature can't eat food entirely...
-                        if (Weight + item.Weight > 10)
-                        {
-                            // eat a part of it
-                            Console.WriteLine("{0} ate a part of a {1}, and now full.", Name, item.Name);
-
-                            // How much creature ate
-                            item.Weight -= (10 - Weight);
-
-                            // A creature get maximum weight
-                            Weight = 10;
-                        }
-                        // then creature can eat it whole
-                        else
-                        {
-                            // eat food
-                            Console.WriteLine("{0} ate a {1}.", Name, item.Name);
-
-                            // Creature get all the weight from a food
-                            Weight += item.Weight;
-
-                            // TODO: Find a proper way of disposing food
-                            // TODO: Add the ability to eat food that is not in your inventory
-                            Inventory.Remove(item);
-                        }
+                        EatFood(item);
                     }
                     else
                         // TODO: Add more variety in handling a situation
@@ -240,6 +251,9 @@ namespace Once_Upon_A_Dog
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
+
+            // A small pause for words to say
+            Thread.Sleep(1000);
 
             // Reset foreground color
             Console.ResetColor();
