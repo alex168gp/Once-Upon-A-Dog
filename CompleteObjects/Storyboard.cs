@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 
 namespace Once_Upon_A_Dog
@@ -56,6 +55,7 @@ namespace Once_Upon_A_Dog
             // Title of a story
             Console.WriteLine("Once upon a dog");
 
+            // Reset color of the console
             Console.ResetColor();
         } 
 
@@ -87,6 +87,8 @@ namespace Once_Upon_A_Dog
         /// </summary>
         public void NewPage()
         {
+            Console.WriteLine("Press any key to continue");
+
             // A pause before page refresh
             Console.ReadKey();
 
@@ -96,9 +98,6 @@ namespace Once_Upon_A_Dog
 
             // Clear console screen
             Console.Clear();
-
-            // Add more and new food
-            foodGenerator();
         } 
 
         /// <summary>
@@ -120,6 +119,10 @@ namespace Once_Upon_A_Dog
             // A little pause to read narrator text
             Thread.Sleep(1000);
         }
+
+        #endregion
+
+        #region Event Methods
 
         // TODO: Check all events
         /// <summary>

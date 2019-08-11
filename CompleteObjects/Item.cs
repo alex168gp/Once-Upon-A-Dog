@@ -8,6 +8,15 @@ namespace Once_Upon_A_Dog
     /// </summary>
     public class Item : INonliving, INotifyPropertyChanged
     {
+        #region Public Events
+
+        /// <summary>
+        /// Fired when property changed
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
         #region Private Members
 
         /// <summary>
@@ -37,9 +46,12 @@ namespace Once_Upon_A_Dog
                 // If weight lower than 0
                 if (value <= 0)
                 {
-                    // Item destroyed
-                    Console.WriteLine($"{Name} destroyed, can't use it");
-                    // Event 
+                    // TODO: Need proper message, for food and not food
+                    if(!IsFood)
+                        // Item destroyed
+                        Console.WriteLine($"{Name} destroyed, can't use it");
+
+                    // fire 
                     OnPropertyChanged("Weight");
                 }
 
@@ -53,7 +65,6 @@ namespace Once_Upon_A_Dog
         /// </summary>
         public bool IsFood { get; set; } = false;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -87,6 +98,8 @@ namespace Once_Upon_A_Dog
 
         #endregion
 
+        #region Event Methods
+        // TODO: Check
         private void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
@@ -95,6 +108,8 @@ namespace Once_Upon_A_Dog
         private void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
+        } 
+
+        #endregion
     }
 }
