@@ -46,6 +46,7 @@
     <Compile Include="CompleteObjects\Creature.cs" />
     <Compile Include="CompleteObjects\Dog.cs" />
     <Compile Include="CompleteObjects\Human.cs" />
+    <Compile Include="CompleteObjects\Storyboard.cs" />
     <Compile Include="CompleteObjects\Wolf.cs" />
     <Compile Include="Interfaces\IBaseExistence.cs" />
     <Compile Include="DataModels\Command.cs" />

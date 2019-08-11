@@ -43,7 +43,7 @@ namespace Once_Upon_A_Dog
                 else if (value == 0)
                 {
                     // TODO: Restrict use of destroyed item
-                    Console.WriteLine("{0} destroyed, can't use it",Name);
+                    Console.WriteLine("{0} destroyed, can't use it", Name);
                     // TODO: Make a proper way of disposing
                     IsDestroyed = true;
                 }

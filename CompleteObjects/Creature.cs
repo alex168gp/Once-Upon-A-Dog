@@ -23,12 +23,12 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// Default noise for this creature
         /// </summary>
-        protected readonly string mNoise;
+        protected readonly string Noise;
 
         /// <summary>
         /// Default console foreground for this creature
         /// </summary>
-        protected readonly ConsoleColor mForegroundColor;
+        protected readonly ConsoleColor ForegroundColor;
 
         #endregion
 
@@ -84,8 +84,8 @@ namespace Once_Upon_A_Dog
             // Set properties
             Name = name;
             Weight = weight;
-            mNoise = noise;
-            mForegroundColor = foregroundColor;
+            Noise = noise;
+            ForegroundColor = foregroundColor;
         }
 
         #endregion
@@ -115,7 +115,7 @@ namespace Once_Upon_A_Dog
                 // Creature get all the weight from a food
                 Weight += food.Weight;
 
-                food.Weight = 1;
+                food.Weight = 0;
 
                 // TODO: Find a proper way of disposing food
                 // TODO: Add the ability to eat food that is not in your inventory
@@ -134,6 +134,9 @@ namespace Once_Upon_A_Dog
         /// <param name="command">What to do with a creature</param>
         public void PerformAction(Creature creature, Command command, string words = null)
         {
+            // Set a foreground for this creature
+            Console.ForegroundColor = ForegroundColor;
+
             // If you want to talk
             if (command.Equals(Command.Talk) && creature != null)
                 // talk
@@ -144,6 +147,12 @@ namespace Once_Upon_A_Dog
             // TODO: Need more interaction
             // TODO: Think about interaction with itself
             // TODO: Exception handling
+
+            // Reset console color to default
+            Console.ResetColor();
+
+            // A small pause to perform an action
+            Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -153,6 +162,9 @@ namespace Once_Upon_A_Dog
         /// <param name="command">What to do with a thing</param>
         public void PerformAction(Item item, Command command)
         {
+            // Set a foreground for this creature
+            Console.ForegroundColor = ForegroundColor;
+
             switch (command)
             {
                 case Command.Eat:
@@ -167,7 +179,7 @@ namespace Once_Upon_A_Dog
                     break;
                 case Command.Talk:
                     // TODO: Add a proper handler
-                    Console.WriteLine("Why I'm talking to a thing?");
+                    MakeSound("Why I'm talking to a thing?");
                     break;
                 case Command.Take:
                     // If we have item...
@@ -176,7 +188,7 @@ namespace Once_Upon_A_Dog
                         Inventory.Add(item);
                     else
                         // TODO: add some handler
-                        Console.WriteLine("There is no item to take");
+                        MakeSound("There is no item to take");
                     break;
                 case Command.Give:
                     throw new System.NotImplementedException("Give is not implemented");
@@ -188,6 +200,9 @@ namespace Once_Upon_A_Dog
                     Console.WriteLine("You used unknown command, I don't know how");
                     break;
             }
+
+            // A small pause to perform an action
+            Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -197,23 +212,32 @@ namespace Once_Upon_A_Dog
         /// <param name="action">An action to execute</param>
         public void PerformComplicatedAction(string action)
         {
+            // Set a foreground for this creature
+            Console.ForegroundColor = ForegroundColor;
+
             // Execute action
             Console.WriteLine("{0} *{1}*", Name, action);
+
+            // Reset console color to default
+            Console.ResetColor();
+
+            // A small pause to perform an action
+            Thread.Sleep(1000);
         }
 
         /// <summary>
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        public virtual void MakeSound(string words = null)
+        public void MakeSound(string words = null)
         {
             // Change color of his words for this creature
-            Console.ForegroundColor = mForegroundColor;
+            Console.ForegroundColor = ForegroundColor;
 
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise
-                Console.WriteLine("{0}: {1}", Name, mNoise);
+                Console.WriteLine("{0}: {1}", Name, Noise);
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0}: {1}", Name, words);
@@ -230,8 +254,11 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="words">Words to say</param>
         /// <param name="creature">Some creature you want to speak with</param>
-        public virtual void MakeSound(Creature creature, string words = null)
+        public void MakeSound(Creature creature, string words = null)
         {
+            // Change color of his words for this creature
+            Console.ForegroundColor = ForegroundColor;
+
             // If this creature want to speak to itself
             if (creature == this)
             {
@@ -241,13 +268,10 @@ namespace Once_Upon_A_Dog
                 return;
             }
 
-            // Change color of his words for this creature
-            Console.ForegroundColor = mForegroundColor;
-
             // If we have nothing to say
             if (String.IsNullOrEmpty(words))
                 // just make some noise, initiator considered way louder
-                Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, mNoise);
+                Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, Noise);
             else
                 // or say what a creature want to say
                 Console.WriteLine("{0} and {1}: {2}", Name, creature.Name, words);
@@ -255,7 +279,7 @@ namespace Once_Upon_A_Dog
             // A small pause for words to say
             Thread.Sleep(1000);
 
-            // Reset foreground color
+            // Reset console color
             Console.ResetColor();
         }
 
