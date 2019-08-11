@@ -18,11 +18,7 @@
         /// </summary>
         Take,
         /// <summary>
-        /// Move item from one <see cref="ILiving.Inventory"/> to another
-        /// </summary>
-        Give,
-        /// <summary>
-        /// Damage item
+        /// Damage <see cref="Item"/>
         /// </summary>
         Kick
     }

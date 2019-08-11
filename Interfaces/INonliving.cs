@@ -8,9 +8,9 @@
         #region Properties
 
         /// <summary>
-        /// True, if you can destroy a thing with interaction
+        /// True if a living can eat this
         /// </summary>
-        bool CanBreak { get; set; }
+        bool IsFood { get; set; }
 
         #endregion
     }

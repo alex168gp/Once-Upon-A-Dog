@@ -16,6 +16,11 @@ namespace Once_Upon_A_Dog
         /// </summary>
         private int mWeight;
 
+        /// <summary>
+        /// Determines a kick power of a creature
+        /// </summary>
+        Random KickPower = new Random();
+
         #endregion
 
         #region Protected Members
@@ -48,12 +53,17 @@ namespace Once_Upon_A_Dog
             set
             {
                 // Weight can't be negative or higher than 10
-                if (value < 0 || value > 10)
-                    throw new System.FormatException("Weight should be more than 0 or lower than 10");
+                if (value > 10)
+                    throw new System.FormatException("Weight should be lower than 10");
                 // creature can have a maximum weight of 10
                 else if (value == 10)
                     // and it become full and can't eat more
                     IsFull = true;
+                // Creature is dead
+                else if (value <= 0)
+                    MakeSound(Name + " is dead.");
+
+                // TODO: dispose of the dead
 
                 // Set new value
                 mWeight = value;
@@ -92,8 +102,19 @@ namespace Once_Upon_A_Dog
 
         #region Private Methods
 
+        /// <summary>
+        /// Eat specified item
+        /// </summary>
+        /// <param name="food">food to eat</param>
         private void EatFood(Item food)
         {
+            // Can't eat if you're full or it's not food
+            if (IsFull || !food.IsFood)
+            {
+                Console.WriteLine("Can't eat this, for some reason");
+                return;
+            }
+                
             // If creature can't eat food entirely...
             if (Weight + food.Weight > 10)
             {
@@ -123,6 +144,11 @@ namespace Once_Upon_A_Dog
             }
         }
 
+        private void TakeItem(Creature creature, Item item)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Public Methods
@@ -132,21 +158,36 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        public void PerformAction(Creature creature, Command command, string words = null)
+        public void PerformAction(Creature creature, Command command, string words = null, Item item = null)
         {
             // Set a foreground for this creature
             Console.ForegroundColor = ForegroundColor;
 
-            // If you want to talk
-            if (command.Equals(Command.Talk) && creature != null)
-                // talk
-                MakeSound(creature, words);
-            else
-                throw new System.Exception("Something is wrong");
+            // We need creature to interact with
+            if (creature == null)
+                throw new NullReferenceException("Crap");
 
-            // TODO: Need more interaction
+            switch (command)
+            {
+                case Command.Eat:
+                    throw new ArgumentException("Can't eat someone else, for now");
+                    break;
+                case Command.Talk:
+                    // let's talk
+                    MakeSound(creature, words);
+                    break;
+                case Command.Take:
+                    // Take item from creature inventory to yourself
+                    TakeItem(creature, item);
+                    break;
+                case Command.Kick:
+                    creature.Weight -= KickPower.Next(0,9);
+                    break;
+                default:
+                    throw new System.Exception("We need action!");
+                    break;
+            }
             // TODO: Think about interaction with itself
-            // TODO: Exception handling
 
             // Reset console color to default
             Console.ResetColor();
@@ -168,17 +209,9 @@ namespace Once_Upon_A_Dog
             switch (command)
             {
                 case Command.Eat:
-                    // Creature can eat only food
-                    if (item.IsFood && !IsFull)
-                    {
-                        EatFood(item);
-                    }
-                    else
-                        // TODO: Add more variety in handling a situation
-                        Console.WriteLine("Can't eat this, for some reason");
+                    EatFood(item);
                     break;
                 case Command.Talk:
-                    // TODO: Add a proper handler
                     MakeSound("Why I'm talking to a thing?");
                     break;
                 case Command.Take:
@@ -189,9 +222,6 @@ namespace Once_Upon_A_Dog
                     else
                         // TODO: add some handler
                         MakeSound("There is no item to take");
-                    break;
-                case Command.Give:
-                    throw new System.NotImplementedException("Give is not implemented");
                     break;
                 case Command.Kick:
                     throw new System.NotImplementedException("Kick is not implemented");

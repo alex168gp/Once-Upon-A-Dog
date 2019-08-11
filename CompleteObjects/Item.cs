@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Once_Upon_A_Dog
 {
     /// <summary>
     /// Nonliving objects
     /// </summary>
-    public class Item : INonliving
+    public class Item : INonliving, INotifyPropertyChanged
     {
         #region Private Members
 
@@ -30,22 +31,16 @@ namespace Once_Upon_A_Dog
         /// </summary>
         public int Weight
         {
-            get
-            {
-                return IsDestroyed ? 0 : mWeight;
-            }
+            get => mWeight;
             set
             {
-                // Weight can't be negative
-                if (value < 0)
-                    throw new System.ArgumentException("Weight should be more than 0");
-                // If it has 0 weight, a thing is destroyed
-                else if (value == 0)
+                // If weight lower than 0
+                if (value <= 0)
                 {
-                    // TODO: Restrict use of destroyed item
-                    Console.WriteLine("{0} destroyed, can't use it", Name);
-                    // TODO: Make a proper way of disposing
-                    IsDestroyed = true;
+                    // Item destroyed
+                    Console.WriteLine($"{Name} destroyed, can't use it");
+                    // Event 
+                    OnPropertyChanged("Weight");
                 }
 
                 // Set new value
@@ -54,19 +49,11 @@ namespace Once_Upon_A_Dog
         }
 
         /// <summary>
-        /// True, if you can break an item
-        /// </summary>
-        public bool CanBreak { get; set; } = false;
-
-        /// <summary>
         /// True if a living can eat this
         /// </summary>
         public bool IsFood { get; set; } = false;
 
-        /// <summary>
-        /// Indicates if an item can't be used
-        /// </summary>
-        public bool IsDestroyed { get; private set; } = false;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -90,15 +77,24 @@ namespace Once_Upon_A_Dog
         /// <param name="name">A name of a food</param>
         /// <param name="weight">A sum of a weight and calories of a food</param>
         /// <param name="canBreak">Change break-ability</param>
-        public Item(string name, int weight, bool canBreak = false, bool isFood = false)
+        public Item(string name, int weight, bool isFood = false)
         {
             // Set properties
             Name = name;
             Weight = weight;
-            CanBreak = canBreak;
             IsFood = isFood;
         }
 
         #endregion
+
+        private void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

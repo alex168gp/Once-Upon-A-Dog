@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 
 namespace Once_Upon_A_Dog
@@ -29,12 +32,32 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// A list of items in a current scene that are not in the inventory of characters
         /// </summary>
-        public HashSet<Item> FieldItems = new HashSet<Item>();
+        public ObservableCollection<Item> FieldItems = new ObservableCollection<Item>();
 
         /// <summary>
         /// A list of characters in a current scene
         /// </summary>
-        public List<Creature> Characters = new List<Creature>(); 
+        public List<Creature> Characters = new List<Creature>();
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Storyboard()
+        {
+            // Hook event
+            FieldItems.CollectionChanged += FieldItems_CollectionChanged;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            // Title of a story
+            Console.WriteLine("Once upon a dog");
+
+            Console.ResetColor();
+        } 
 
         #endregion
 
@@ -96,6 +119,43 @@ namespace Once_Upon_A_Dog
 
             // A little pause to read narrator text
             Thread.Sleep(1000);
+        }
+
+        // TODO: Check all events
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FieldItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (Item item in e.OldItems)
+                {
+                    //Console.WriteLine(item.Name + "destroyed");
+                    item.PropertyChanged -= Item_PropertyChanged;
+                }
+            }
+            if (e.NewItems != null)
+            {
+                foreach (Item item in e.NewItems)
+                {
+                    //Console.WriteLine(item.Name + "added");
+                    item.PropertyChanged += Item_PropertyChanged;
+                }
+            }
+        }
+
+        /// <summary>
+        /// An event for <see cref="Item.Weight"/> property, when the value to set is lower or equal than 0
+        /// </summary>
+        /// <param name="sender">Item</param>
+        /// <param name="e"></param>
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //Console.WriteLine($"{(sender as Item).Name} Will be destroyed");
+            FieldItems.Remove((sender as Item));
         }
 
         #endregion

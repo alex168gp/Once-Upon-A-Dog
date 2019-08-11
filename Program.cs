@@ -10,10 +10,11 @@ namespace Once_Upon_A_Dog
     {
         #region Main
 
-        static async System.Threading.Tasks.Task Main(string[] args)
+        static void Main(string[] args)
         {
-            List<Item> fieldItems = new List<Item>();
+            // Start a story
             Storyboard storyboard = new Storyboard();
+            
             #region All characters
 
             Dog dog = new Dog("Old dog", 2);
@@ -25,18 +26,24 @@ namespace Once_Upon_A_Dog
             Creature crowd = new Creature("Crowd in a distance", 10);
             Wolf wolf = new Wolf("Old wolf", 2);
             Creature crowdInHouse = new Creature("People at the wedding", 1);
-            
+
             #endregion
 
-            
+            //Creature test = new Creature("Test subject", 9);
+            //Item testItem1 = new Item("Test item 1", 9);
+            //Item testItem2 = new Item("Test item 2", 1);
+            //storyboard.FieldItems.Add(testItem1);
+            //storyboard.FieldItems[0].Weight = 0;
+            //storyboard.FieldItems.Add(testItem2);
+            //wolf.PerformAction(test, Command.Talk);
+            //storyboard.FieldItems[0].Weight = -1;
 
             #region Original Story
 
             // TODO: Create a storyboard for text, and change all MakeSound implementations to fit
             // TODO: Create a scene where all objects will be connected
             // TODO: Add interactivity
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Once upon a dog");
+
             // First scene
             Storyboard.NarratorWords("Morning.");
             Storyboard.NarratorWords("You can see a bunch of small white thatched houses.");
@@ -134,13 +141,6 @@ namespace Once_Upon_A_Dog
             // Last scene
             storyboard.NewPage();
 
-            fieldItems.Clear();
-            fieldItems.Add(new Item("Food", 2, isFood: true));
-            fieldItems.Add(new Item("Food", 2, isFood: true));
-            fieldItems.Add(new Item("Food", 2, isFood: true));
-            fieldItems.Add(new Item("Food", 2, isFood: true));
-            fieldItems.Add(new Item("Food", 2, isFood: true));
-            fieldItems.Remove(new Item("Food", 2, isFood: true));
             Storyboard.NarratorWords("Winter.");
             Storyboard.NarratorWords("A family decided to arrange a wedding for their daughter, the whole village and their relatives gathered in the house.");
             Storyboard.NarratorWords("After the accident with a baby, old dog started to live like before, and even better.");
