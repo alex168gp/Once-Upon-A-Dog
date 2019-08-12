@@ -12,7 +12,7 @@ namespace Once_Upon_A_Dog
     /// </summary>
     public class Storyboard
     {
-        #region Private Members
+        #region Private Random Members
 
         /// <summary>
         /// A field that allows to get random number that should be used for item generation
@@ -61,24 +61,6 @@ namespace Once_Upon_A_Dog
 
         #endregion
 
-        #region Private Methods
-
-        /// <summary>
-        /// Adds random amount of food to a scene
-        /// </summary>
-        private void foodGenerator(int min = 2, int max = 10)
-        {
-            // Minimum value for itemGenerator can't be lower than 2
-            if (min < 2)
-                throw new ArgumentException("min should be higher than 2!");
-
-            // Add random amount of food to a scene with a random weight
-            for (int i = 0; i < ItemGenerator.Next(min, max); i++)
-                FieldItems.Add(new Item("Food", WeightGenerator.Next(1, 3), isFood: true));
-        }
-
-        #endregion
-
         #region Public Methods
 
         /// <summary>
@@ -118,6 +100,24 @@ namespace Once_Upon_A_Dog
 
             // A little pause to read narrator text
             Thread.Sleep(1000);
+        }
+
+        #endregion
+
+        #region Private Generators
+
+        /// <summary>
+        /// Adds random amount of food to a scene
+        /// </summary>
+        private void foodGenerator(int min = 2, int max = 10)
+        {
+            // Minimum value for itemGenerator can't be lower than 2
+            if (min < 2)
+                throw new ArgumentException("min should be higher than 2!");
+
+            // Add random amount of food to a scene with a random weight
+            for (int i = 0; i < ItemGenerator.Next(min, max); i++)
+                FieldItems.Add(new Item("Food", WeightGenerator.Next(1, 3), isFood: true));
         }
 
         #endregion

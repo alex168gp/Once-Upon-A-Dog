@@ -34,6 +34,9 @@ namespace Once_Upon_A_Dog
             //Item testItem2 = new Item("Test item 2", 1);
             //storyboard.FieldItems.Add(testItem1);
             //storyboard.FieldItems[0].Weight = 0;
+            //var f = storyboard.FieldItems[0];
+            //var test = storyboard.FieldItems[0];
+            //storyboard.FieldItems[0].Weight = 0;
             //storyboard.FieldItems.Add(testItem2);
             //wolf.PerformAction(test, Command.Talk);
             //storyboard.FieldItems[0].Weight = -1;
@@ -47,7 +50,7 @@ namespace Once_Upon_A_Dog
             // First scene
             Storyboard.NarratorWords("Morning.");
             Storyboard.NarratorWords("You can see a bunch of small white thatched houses.");
-            // TODO: Add more animals
+            // TODO: Add more animals, maybe
             Storyboard.NarratorWords("Somewhere a rooster greets the rising sun.");
             Console.WriteLine("-------------------------------------------------------------------------");
             Storyboard.NarratorWords("In a small village lived old dog.");
