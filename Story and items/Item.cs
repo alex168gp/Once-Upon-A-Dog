@@ -99,16 +99,18 @@ namespace Once_Upon_A_Dog
         #endregion
 
         #region Event Methods
-        // TODO: Check
-        private void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(this, e);
-        }
 
         private void OnPropertyChanged(string propertyName)
         {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+            //OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         } 
+
+
 
         #endregion
     }

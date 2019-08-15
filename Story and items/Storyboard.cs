@@ -55,7 +55,7 @@ namespace Once_Upon_A_Dog
             // Title of a story
             Console.WriteLine("Once upon a dog");
 
-            // Reset color of the console
+            // Reset color to default
             Console.ResetColor();
         } 
 
@@ -69,14 +69,22 @@ namespace Once_Upon_A_Dog
         /// </summary>
         public void NewPage()
         {
+            // When you press something sooner than the message below appear
+            // console will remember that something is pressed
+            // and continue to execute code immediately
+            Thread.Sleep(1000);
+            
             Console.WriteLine("Press any key to continue");
 
             // A pause before page refresh
-            Console.ReadKey();
+            Console.ReadKey(true);
 
             // TODO: Try async?
             // Clears all items that are not carried by characters
             FieldItems.Clear();
+
+            // Add some food for each scene
+            foodGenerator(2, 10);
 
             // Clear console screen
             Console.Clear();
@@ -126,9 +134,9 @@ namespace Once_Upon_A_Dog
 
         // TODO: Check all events
         /// <summary>
-        /// 
+        /// Hooks <see cref="Item.PropertyChanged"/> for each item added to list, and unhook on Remove, Replace and Move
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender"><see cref="FieldItems"/></param>
         /// <param name="e"></param>
         private void FieldItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -136,7 +144,7 @@ namespace Once_Upon_A_Dog
             {
                 foreach (Item item in e.OldItems)
                 {
-                    //Console.WriteLine(item.Name + "destroyed");
+                    // Unhook event
                     item.PropertyChanged -= Item_PropertyChanged;
                 }
             }
@@ -144,7 +152,7 @@ namespace Once_Upon_A_Dog
             {
                 foreach (Item item in e.NewItems)
                 {
-                    //Console.WriteLine(item.Name + "added");
+                    // Start to listen to a property changed event
                     item.PropertyChanged += Item_PropertyChanged;
                 }
             }
@@ -157,7 +165,7 @@ namespace Once_Upon_A_Dog
         /// <param name="e"></param>
         private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //Console.WriteLine($"{(sender as Item).Name} Will be destroyed");
+            // Delete item from a list
             FieldItems.Remove((sender as Item));
         }
 

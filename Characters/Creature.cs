@@ -17,6 +17,11 @@ namespace Once_Upon_A_Dog
         private int mWeight;
 
         /// <summary>
+        /// True, if a creature can't eat more
+        /// </summary>
+        private bool mIsFull;
+
+        /// <summary>
         /// Determines a kick power of a creature
         /// </summary>
         Random KickPower = new Random();
@@ -58,7 +63,7 @@ namespace Once_Upon_A_Dog
                 // creature can have a maximum weight of 10
                 else if (value == 10)
                     // and it become full and can't eat more
-                    IsFull = true;
+                    mIsFull = true;
                 // Creature is dead
                 else if (value <= 0)
                     MakeSound(Name + " is dead.");
@@ -73,7 +78,21 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// True, if a creature can't eat more
         /// </summary>
-        public bool IsFull { get; set; } = false;
+        public bool IsFull
+        {
+            get { return mIsFull; }
+            set
+            {
+                // If we set IsFull directly
+                if (value)
+                    // Update weight
+                    mWeight = 10;
+
+                // Set property
+                mIsFull = value;
+            }
+        }
+
 
         /// <summary>
         /// An inventory and equipped things
@@ -205,6 +224,15 @@ namespace Once_Upon_A_Dog
         {
             // Set a foreground for this creature
             Console.ForegroundColor = ForegroundColor;
+
+            // If we don't have item use
+            if (item == null) 
+            {
+                Console.WriteLine("No item to use");
+
+                // we won't do anything
+                return;
+            }
 
             switch (command)
             {
