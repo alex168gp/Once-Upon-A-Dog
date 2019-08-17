@@ -11,7 +11,7 @@ namespace Once_Upon_A_Dog
         // A shortcut
         delegate void NarratorWordsDelegate(string words = null);
 
-        delegate void CharacterWordsDelegate(Creature creature, string words = null);
+        delegate void CharacterWordsDelegate(Creature creature, string words = null, int repeat = 1);
 
 
         #region Main
@@ -101,8 +101,7 @@ namespace Once_Upon_A_Dog
             narrator("Somewhere a rooster greets the rising sun.");
             narrator("-------------------------------------------------------------------------");
             narrator("In a small village lived old dog.");
-            characterWords(dog);
-            characterWords(dog);
+            characterWords(dog, repeat: 2);
             narrator("His owners were a family of 4: father, mother, daughter and baby son.");
             narrator("Old dog caused a lot of small troubles, but he was always forgiven.");
             narrator("Father and mother with baby left to sell some goods.");
@@ -170,9 +169,7 @@ namespace Once_Upon_A_Dog
             son.MakeSound();
             son.PerformComplicatedAction("Playing with a wolf head");
             dog.PerformComplicatedAction("Appears from a bush");
-            characterWords(dog);
-            characterWords(dog);
-            characterWords(dog);
+            characterWords(dog, repeat: 3);
             dog.PerformComplicatedAction($"Starts a fight with {wolf.Name}");
             wolf.PerformComplicatedAction("Drops a baby");
             father.PerformComplicatedAction("Hides behind a bush and just watch");
@@ -195,8 +192,7 @@ namespace Once_Upon_A_Dog
             narrator("A family decided to arrange a wedding for their daughter, the whole village and their relatives gathered in the house.");
             narrator("After the accident with a baby, old dog started to live like before, and even better.");
             narrator("Everything bad was forgotten.");
-            characterWords(wolf);
-            characterWords(wolf);
+            characterWords(wolf, repeat: 2);
             narrator("Dog run into the forest.");
             narrator("He found his friend wolf on a stump, shivering from cold and howling.");
             dog.PerformComplicatedAction("Breathing hard");
@@ -254,10 +250,10 @@ namespace Once_Upon_A_Dog
 
         #region Helpers
 
-        static void CharacterWords<T>(T creature, string words = null)
+        static void CharacterWords<T>(T creature, string words = null, int repeat = 1)
             where T : Creature
         {
-            creature.MakeSound(words);
+            creature.MakeSound(words, repeat);
         }
 
         #endregion

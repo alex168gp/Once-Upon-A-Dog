@@ -107,10 +107,7 @@ namespace Once_Upon_A_Dog
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
-            //OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         } 
-
-
 
         #endregion
     }

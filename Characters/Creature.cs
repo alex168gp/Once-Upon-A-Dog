@@ -7,7 +7,7 @@ namespace Once_Upon_A_Dog
     /// <summary>
     /// Base living creature
     /// </summary>
-    public class Creature : ILiving
+    public class Creature : ILiving<Item, Creature>
     {
         #region Private Members
 
@@ -287,24 +287,27 @@ namespace Once_Upon_A_Dog
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        public void MakeSound(string words = null)
+        public void MakeSound(string words = null, int repeat = 1)
         {
-            // Change color of his words for this creature
-            Console.ForegroundColor = ForegroundColor;
+            for (int i = 0; i < repeat; i++)
+            {
+                // Change color of his words for this creature
+                Console.ForegroundColor = ForegroundColor;
 
-            // If we have nothing to say
-            if (String.IsNullOrEmpty(words))
-                // just make some noise
-                Console.WriteLine("{0}: {1}", Name, Noise);
-            else
-                // or say what a creature want to say
-                Console.WriteLine("{0}: {1}", Name, words);
+                // If we have nothing to say
+                if (String.IsNullOrEmpty(words))
+                    // just make some noise
+                    Console.WriteLine("{0}: {1}", Name, Noise);
+                else
+                    // or say what a creature want to say
+                    Console.WriteLine("{0}: {1}", Name, words);
 
-            // A small pause for words to say
-            Thread.Sleep(1000);
+                // A small pause for words to say
+                Thread.Sleep(1000);
 
-            // Reset foreground color
-            Console.ResetColor();
+                // Reset foreground color
+                Console.ResetColor();
+            }
         }
 
         /// <summary>

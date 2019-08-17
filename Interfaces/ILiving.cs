@@ -5,7 +5,9 @@ namespace Once_Upon_A_Dog
     /// <summary>
     /// Describes behavior and properties of a living being
     /// </summary>
-    public interface ILiving : IBaseExistence
+    public interface ILiving<TItem, TLiving> : IBaseExistence
+        where TItem : INonliving
+        where TLiving : ILiving<TItem, TLiving>
     {
         #region Properties
 
@@ -17,7 +19,7 @@ namespace Once_Upon_A_Dog
         /// <summary>
         /// An inventory and equipped things
         /// </summary>
-        List<Item> Inventory { get; set; }
+        List<TItem> Inventory { get; set; }
 
         #endregion
 
@@ -28,14 +30,14 @@ namespace Once_Upon_A_Dog
         /// </summary>
         /// <param name="living">A creature to interact with</param>
         /// <param name="command">What to do with a creature</param>
-        void PerformAction(Creature creature, Command command, string words, Item item);
+        void PerformAction(TLiving creature, Command command, string words, TItem item);
 
         /// <summary>
         /// Interact with a thing
         /// </summary>
         /// <param name="nonliving">A thing to interact with</param>
         /// <param name="command">What to do with a thing</param>
-        void PerformAction(Item item, Command command);
+        void PerformAction(TItem item, Command command);
 
         /// <summary>
         /// Execute action that is out of the basic <see cref="Command"/>s.
@@ -48,14 +50,14 @@ namespace Once_Upon_A_Dog
         /// Say something
         /// </summary>
         /// <param name="words">Words to say</param>
-        void MakeSound(string words);
+        void MakeSound(string words, int repeat);
 
         /// <summary>
         /// Say something with another creature
         /// </summary>
         /// <param name="words">Words to say</param>
         /// <param name="creature">Some creature you want to speak with</param>
-        void MakeSound(Creature creature, string words);
+        void MakeSound(TLiving creature, string words);
 
         #endregion
     }

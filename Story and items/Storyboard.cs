@@ -74,7 +74,7 @@ namespace Once_Upon_A_Dog
             // and continue to execute code immediately
             Thread.Sleep(1000);
             
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine("\nPress any key to continue");
 
             // A pause before page refresh
             Console.ReadKey(true);
